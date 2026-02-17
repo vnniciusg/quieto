@@ -29,5 +29,7 @@ def build_strategy(config: DebounceConfig) -> BaseStrategy:
     """Resolve *config.strategy* to a concrete ``BaseStrategy`` instance."""
     factory = REGISTRY.get(config.strategy)
     if not factory:
-        raise ValueError(f"Unknown strategy: {config.strategy!r}. Registered: {", ".join(s.value for s in REGISTRY)}")
+        raise ValueError(
+            f"Unknown strategy: {config.strategy!r}. Registered: {', '.join(s.value for s in REGISTRY)}"
+        )
     return factory(config)
