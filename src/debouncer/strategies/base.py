@@ -10,9 +10,9 @@ class BaseStrategy(ABC):
     Every strategy buffers incoming messages and flushes them in batches
     according to its own timing/coalescing rules.
 
-    Subclasses must implement :meth:`push`, :meth:`next_batch`, and
-    :meth:`flush`.  The constructor handles the common ``delay`` and
-    ``max_wait`` parameters and validates them eagerly.
+    Subclasses must implement :meth:`push`, :meth:`next_batch`,
+    :meth:`flush`, and :meth:`shutdown`.  The constructor handles the
+    common ``delay`` and ``max_wait`` parameters.
 
     Args:
         delay: Quiet-period delay in seconds.  Must be positive.
@@ -43,6 +43,10 @@ class BaseStrategy(ABC):
     @abstractmethod
     def flush(self) -> list[Any]:
         """Force-flush buffered messages and return them immediately."""
+
+    @abstractmethod
+    def shutdown(self) -> None:
+        """Signal shutdown to unblock any waiters."""
 
     def __repr__(self) -> str:
         return f"{type(self).__name__}(delay={self.delay}, max_wait={self.max_wait})"
