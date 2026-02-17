@@ -42,9 +42,7 @@ class TestActorMaxWait:
     async def test_max_wait_forces_flush(self):
         rx: asyncio.Queue = asyncio.Queue()
         tx: asyncio.Queue = asyncio.Queue()
-        task = asyncio.create_task(
-            debounce_actor(rx, tx, delay=1.0, max_wait=0.1)
-        )
+        task = asyncio.create_task(debounce_actor(rx, tx, delay=1.0, max_wait=0.1))
 
         await rx.put("msg1")
         batch = await asyncio.wait_for(tx.get(), timeout=0.5)
@@ -56,9 +54,7 @@ class TestActorMaxWait:
     async def test_max_wait_none(self):
         rx: asyncio.Queue = asyncio.Queue()
         tx: asyncio.Queue = asyncio.Queue()
-        task = asyncio.create_task(
-            debounce_actor(rx, tx, delay=0.05, max_wait=None)
-        )
+        task = asyncio.create_task(debounce_actor(rx, tx, delay=0.05, max_wait=None))
 
         await rx.put("hello")
         batch = await asyncio.wait_for(tx.get(), timeout=1.0)

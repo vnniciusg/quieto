@@ -95,9 +95,7 @@ class SessionManager:
     def _spawn_actor(self) -> _SessionHandle:
         input_q: asyncio.Queue[Any] = asyncio.Queue(maxsize=self.max_queue_size)
         output_q: asyncio.Queue[list[Any]] = asyncio.Queue(maxsize=64)
-        task = asyncio.create_task(
-            debounce_actor(input_q, output_q, self.delay, self.max_wait)
-        )
+        task = asyncio.create_task(debounce_actor(input_q, output_q, self.delay, self.max_wait))
         return _SessionHandle(
             input_queue=input_q,
             output_queue=output_q,

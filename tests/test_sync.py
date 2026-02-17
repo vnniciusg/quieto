@@ -10,6 +10,7 @@ class TestEventLoopThread:
         elt = _EventLoopThread()
         elt.start()
         try:
+
             async def coro():
                 return 42
 
@@ -27,6 +28,7 @@ class TestEventLoopThread:
     def test_run_coroutine_auto_starts(self):
         elt = _EventLoopThread()
         try:
+
             async def coro():
                 return "auto"
 
@@ -43,6 +45,7 @@ class TestEventLoopThread:
         elt = _EventLoopThread()
         elt.start()
         try:
+
             async def async_op():
                 await asyncio.sleep(0.01)
                 return "done"

@@ -13,8 +13,12 @@ class TestBaseStrategy:
     def test_delay_validation(self):
         class Dummy(BaseStrategy):
             def push(self, message): ...
-            async def next_batch(self): return []
-            def flush(self): return []
+            async def next_batch(self):
+                return []
+
+            def flush(self):
+                return []
+
             def shutdown(self): ...
 
         with pytest.raises(ValueError, match="delay must be positive"):
@@ -23,8 +27,12 @@ class TestBaseStrategy:
     def test_max_wait_validation(self):
         class Dummy(BaseStrategy):
             def push(self, message): ...
-            async def next_batch(self): return []
-            def flush(self): return []
+            async def next_batch(self):
+                return []
+
+            def flush(self):
+                return []
+
             def shutdown(self): ...
 
         with pytest.raises(ValueError, match="max_wait must be positive"):
@@ -33,8 +41,12 @@ class TestBaseStrategy:
     def test_repr(self):
         class Dummy(BaseStrategy):
             def push(self, message): ...
-            async def next_batch(self): return []
-            def flush(self): return []
+            async def next_batch(self):
+                return []
+
+            def flush(self):
+                return []
+
             def shutdown(self): ...
 
         d = Dummy(delay=1.0, max_wait=5.0)
@@ -43,8 +55,12 @@ class TestBaseStrategy:
     def test_repr_no_max_wait(self):
         class Dummy(BaseStrategy):
             def push(self, message): ...
-            async def next_batch(self): return []
-            def flush(self): return []
+            async def next_batch(self):
+                return []
+
+            def flush(self):
+                return []
+
             def shutdown(self): ...
 
         d = Dummy(delay=1.0)

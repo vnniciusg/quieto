@@ -35,9 +35,7 @@ class Debouncer:
         if value <= 0:
             raise ValueError(f"delay must be positive, got {value}")
         if self._strategy.max_wait is not None and value > self._strategy.max_wait:
-            raise ValueError(
-                f"delay ({value}) must be <= max_wait ({self._strategy.max_wait})"
-            )
+            raise ValueError(f"delay ({value}) must be <= max_wait ({self._strategy.max_wait})")
         self._strategy.delay = value
 
     @property

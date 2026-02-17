@@ -50,3 +50,8 @@ line-length = 100
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "UP", "B", "A", "SIM", "TCH"]
 ignore = ["UP047"]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.5.1",
+]
