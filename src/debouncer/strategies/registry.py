@@ -12,6 +12,8 @@ from __future__ import annotations
 from collections.abc import Callable
 
 from debouncer.config import DebounceConfig, Strategy
+from debouncer.strategies.actor import CoalescingActorStrategy
+from debouncer.strategies.adaptive import AdaptiveDebouncer
 from debouncer.strategies.base import BaseStrategy
 from debouncer.strategies.trailing import TrailingDebouncer
 
@@ -19,6 +21,14 @@ StrategyFactory = Callable[[DebounceConfig], BaseStrategy]
 
 REGISTRY: dict[Strategy, StrategyFactory] = {
     Strategy.TRAILING: lambda cfg: TrailingDebouncer(
+        delay=cfg.delay,
+        max_wait=cfg.max_wait,
+    ),
+    Strategy.ADAPTIVE: lambda cfg: AdaptiveDebouncer(
+        delay=cfg.delay,
+        max_wait=cfg.max_wait,
+    ),
+    Strategy.ACTOR: lambda cfg: CoalescingActorStrategy(
         delay=cfg.delay,
         max_wait=cfg.max_wait,
     ),
@@ -30,6 +40,7 @@ def build_strategy(config: DebounceConfig) -> BaseStrategy:
     factory = REGISTRY.get(config.strategy)
     if not factory:
         raise ValueError(
-            f"Unknown strategy: {config.strategy!r}. Registered: {', '.join(s.value for s in REGISTRY)}"
+            f"Unknown strategy: {config.strategy!r}. "
+            f"Registered: {', '.join(s.value for s in REGISTRY)}"
         )
     return factory(config)

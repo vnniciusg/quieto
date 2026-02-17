@@ -10,9 +10,16 @@ class Strategy(StrEnum):
     TRAILING: Trailing-edge debounce with optional max wait.
               Buffers events, resets timer on each new event,
               fires when quiet period expires.
+    ADAPTIVE: Adaptive debounce that adjusts delay based on
+              inter-message intervals using an EMA.
+    ACTOR:    Queue-based coalescing actor with natural backpressure.
+              Messages flow through asyncio queues; the actor flushes
+              batches when the timer expires.
     """
 
     TRAILING = "trailing"
+    ADAPTIVE = "adaptive"
+    ACTOR = "actor"
 
 
 @dataclass(frozen=True, slots=True)
