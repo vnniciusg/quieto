@@ -30,8 +30,10 @@ class TrailingDebouncer(BaseStrategy):
 
     __slots__ = (
         "_buffer",
+        "_closed",
         "_flush_event",
         "_last_batch",
+        "_loop",
         "_max_wait_handle",
         "_timer_handle",
     )
@@ -43,10 +45,17 @@ class TrailingDebouncer(BaseStrategy):
         self._max_wait_handle: TimerHandle | None = None
         self._flush_event: Event = Event()
         self._last_batch: list[Any] = []
+        self._loop = None
+        self._closed = False
+
+    def _get_loop(self):
+        if self._loop is None:
+            self._loop = get_running_loop()
+        return self._loop
 
     def push(self, message: Any) -> None:
         """Add message to the buffer and reset the delay timer."""
-        loop = get_running_loop()
+        loop = self._get_loop()
 
         if not self._buffer and self.max_wait is not None:
             self._max_wait_handle = loop.call_later(self.max_wait, self._do_flush)
@@ -70,19 +79,23 @@ class TrailingDebouncer(BaseStrategy):
             self._do_flush()
         return self._last_batch
 
-    def _cancel_timer(self, attr_name: str) -> None:
-        handle: TimerHandle | None = getattr(self, attr_name)
-        if handle is not None:
-            handle.cancel()
-        setattr(self, attr_name, None)
+    def shutdown(self) -> None:
+        """Signal that no more messages will arrive, unblocking waiters."""
+        self._closed = True
+        self.flush()
+        self._flush_event.set()
 
     def _do_flush(self) -> None:
         if not self._buffer:
             return
 
-        self._cancel_timer("_timer_handle")
-        self._cancel_timer("_max_wait_handle")
+        if self._timer_handle is not None:
+            self._timer_handle.cancel()
+            self._timer_handle = None
 
-        self._last_batch = self._buffer.copy()
-        self._buffer.clear()
+        if self._max_wait_handle is not None:
+            self._max_wait_handle.cancel()
+            self._max_wait_handle = None
+
+        self._last_batch, self._buffer = self._buffer, []
         self._flush_event.set()
