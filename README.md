@@ -2,7 +2,7 @@
 
 High-performance async debounce library for Python 3.13+ with message coalescing, designed for LLM-powered applications.
 
-> **Built with [Claude Code](https://claude.ai/claude-code)** — this entire codebase (architecture, implementation, tests, and this README) was written by Claude via Claude Code.
+> **Built with [Claude Code](https://claude.ai)** — this entire codebase (architecture, implementation, tests, and this README) was written by Claude via Claude Code.
 
 ## The problem
 
