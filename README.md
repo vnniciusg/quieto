@@ -22,13 +22,19 @@ LLM receives: ["hi", "everything ok?"]
 ## Install
 
 ```bash
-pip install debouncer
+uv add debouncer
 ```
 
 With LangChain integration:
 
 ```bash
-pip install debouncer[langchain]
+uv add debouncer[langchain]
+```
+
+Or with pip:
+
+```bash
+pip install debouncer
 ```
 
 ## Quick start
@@ -153,12 +159,25 @@ await handler.close()  # shut down
 ## Development
 
 ```bash
+# Install dependencies
 uv sync --extra dev
+
+# Run tests
 uv run pytest tests/ -v
-uv run coverage run -m pytest tests/ && uv run coverage report --show-missing
+
+# Run tests with coverage
+uv run pytest tests/ -v --cov=src --cov-report=term
+
+# Lint
 uv run ruff check src/ tests/
+
+# Format
+uv run ruff format src/ tests/
+
+# Type check
+uv run mypy src/
 ```
 
 ## License
 
-MIT
+[MIT](LICENSE)
