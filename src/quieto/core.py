@@ -4,14 +4,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from debouncer.strategies.registry import build_strategy
+from quieto.strategies.registry import build_strategy
 
 if TYPE_CHECKING:
     from collections.abc import AsyncIterator
 
-    from debouncer.strategies.base import BaseStrategy
+    from quieto.strategies.base import BaseStrategy
 
-from debouncer.config import DebounceConfig
+from quieto.config import DebounceConfig
 
 
 class Debouncer:

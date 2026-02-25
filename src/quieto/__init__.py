@@ -9,9 +9,9 @@ Basic usage:
 
     debouncer = Debouncer(DebounceConfig(delay=2.0, max_wait=10.0))
 
-    await debouncer.push("hello")
-    await debouncer.push("world")
-    batch = await debouncer.next_batch()  # ["hello", "world"]
+    await quieto.push("hello")
+    await quieto.push("world")
+    batch = await quieto.next_batch()  # ["hello", "world"]
 
 Decorator usage:
 
@@ -22,14 +22,14 @@ Decorator usage:
         return await llm.invoke("\\n".join(messages))
 """
 
-from debouncer.config import DebounceConfig, Strategy
-from debouncer.core import Debouncer
-from debouncer.decorator import debounce
-from debouncer.session import SessionManager
-from debouncer.strategies.actor import CoalescingActorStrategy
-from debouncer.strategies.adaptive import AdaptiveDebouncer
-from debouncer.strategies.base import BaseStrategy
-from debouncer.strategies.trailing import TrailingDebouncer
+from quieto.config import DebounceConfig, Strategy
+from quieto.core import Debouncer
+from quieto.decorator import debounce
+from quieto.session import SessionManager
+from quieto.strategies.actor import CoalescingActorStrategy
+from quieto.strategies.adaptive import AdaptiveDebouncer
+from quieto.strategies.base import BaseStrategy
+from quieto.strategies.trailing import TrailingDebouncer
 
 __all__ = [
     "AdaptiveDebouncer",

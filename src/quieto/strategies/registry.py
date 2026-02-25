@@ -11,11 +11,11 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-from debouncer.config import DebounceConfig, Strategy
-from debouncer.strategies.actor import CoalescingActorStrategy
-from debouncer.strategies.adaptive import AdaptiveDebouncer
-from debouncer.strategies.base import BaseStrategy
-from debouncer.strategies.trailing import TrailingDebouncer
+from quieto.config import DebounceConfig, Strategy
+from quieto.strategies.actor import CoalescingActorStrategy
+from quieto.strategies.adaptive import AdaptiveDebouncer
+from quieto.strategies.base import BaseStrategy
+from quieto.strategies.trailing import TrailingDebouncer
 
 StrategyFactory = Callable[[DebounceConfig], BaseStrategy]
 

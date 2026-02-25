@@ -7,7 +7,7 @@ import time
 from dataclasses import dataclass, field
 from typing import Any
 
-from debouncer.strategies.actor import _STOP, debounce_actor
+from quieto.strategies.actor import _STOP, debounce_actor
 
 
 @dataclass

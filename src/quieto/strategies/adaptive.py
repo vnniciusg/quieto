@@ -3,8 +3,8 @@
 import time
 from typing import Any
 
-from debouncer.strategies.base import BaseStrategy
-from debouncer.strategies.trailing import TrailingDebouncer
+from quieto.strategies.base import BaseStrategy
+from quieto.strategies.trailing import TrailingDebouncer
 
 
 class AdaptiveDebouncer(BaseStrategy):

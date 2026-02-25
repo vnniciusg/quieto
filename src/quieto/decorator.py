@@ -5,8 +5,8 @@ from collections.abc import Awaitable, Callable
 from functools import wraps
 from typing import Any, NamedTuple, TypeVar, cast, overload
 
-from debouncer.config import DebounceConfig, Strategy
-from debouncer.core import Debouncer
+from quieto.config import DebounceConfig, Strategy
+from quieto.core import Debouncer
 
 F = TypeVar("F", bound=Callable[..., Awaitable[Any]])
 

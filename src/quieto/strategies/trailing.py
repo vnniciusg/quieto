@@ -3,7 +3,7 @@
 from asyncio import Event, TimerHandle, get_running_loop
 from typing import Any
 
-from debouncer.strategies.base import BaseStrategy
+from quieto.strategies.base import BaseStrategy
 
 
 class TrailingDebouncer(BaseStrategy):

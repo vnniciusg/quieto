@@ -3,7 +3,7 @@
 import asyncio
 from typing import Any
 
-from debouncer.strategies.base import BaseStrategy
+from quieto.strategies.base import BaseStrategy
 
 _STOP = object()
 

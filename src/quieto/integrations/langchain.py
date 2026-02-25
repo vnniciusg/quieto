@@ -22,8 +22,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from debouncer.config import DebounceConfig, Strategy
-from debouncer.core import Debouncer
+from quieto.config import DebounceConfig, Strategy
+from quieto.core import Debouncer
 
 if TYPE_CHECKING:
     from collections.abc import Callable
