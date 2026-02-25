@@ -2,9 +2,9 @@
 
 import pytest
 
-from debouncer.config import Strategy
-from debouncer.core import Debouncer
-from debouncer.decorator import ExtractedMessage, _extract_message, debounce
+from quieto.config import Strategy
+from quieto.core import Debouncer
+from quieto.decorator import ExtractedMessage, _extract_message, debounce
 
 
 class TestExtractMessage:
@@ -88,7 +88,7 @@ class TestDebounceDecorator:
         async def handler(messages: list[str]) -> None:
             pass
 
-        assert handler.debouncer.config.strategy is Strategy.TRAILING  # type: ignore[attr-defined]
+        assert handler.quieto.config.strategy is Strategy.TRAILING  # type: ignore[attr-defined]
 
     async def test_preserves_function_name(self):
         @debounce(delay=1.0)

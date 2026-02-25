@@ -2,11 +2,11 @@
 
 import pytest
 
-from debouncer.config import DebounceConfig, Strategy
-from debouncer.strategies.actor import CoalescingActorStrategy
-from debouncer.strategies.adaptive import AdaptiveDebouncer
-from debouncer.strategies.registry import build_strategy
-from debouncer.strategies.trailing import TrailingDebouncer
+from quieto.config import DebounceConfig, Strategy
+from quieto.strategies.actor import CoalescingActorStrategy
+from quieto.strategies.adaptive import AdaptiveDebouncer
+from quieto.strategies.registry import build_strategy
+from quieto.strategies.trailing import TrailingDebouncer
 
 
 class TestBuildStrategy:

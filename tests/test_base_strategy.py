@@ -2,7 +2,7 @@
 
 import pytest
 
-from debouncer.strategies.base import BaseStrategy
+from quieto.strategies.base import BaseStrategy
 
 
 class TestBaseStrategy:

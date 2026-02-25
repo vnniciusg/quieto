@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "debouncer"
+name = "quieto"
 dynamic = ["version"]
 description = "High-performance debounce library for Python with async support and LLM framework integrations"
 readme = "README.md"
@@ -21,7 +21,7 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-langchain = ["langchain-core>=0.3"]
+langchain = ["langchain >= 1.0"]
 dev = [
     "pytest>=8",
     "pytest-asyncio>=0.24",
@@ -33,7 +33,7 @@ dev = [
 ]
 
 [tool.hatch.version]
-path = "src/debouncer/__init__.py"
+path = "src/quieto/__init__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/debouncer"]

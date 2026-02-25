@@ -2,7 +2,7 @@
 
 import asyncio
 
-from debouncer.strategies.actor import _STOP, CoalescingActorStrategy, debounce_actor
+from quieto.strategies.actor import _STOP, CoalescingActorStrategy, debounce_actor
 
 
 class TestActorCoalescing:

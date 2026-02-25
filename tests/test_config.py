@@ -2,7 +2,7 @@
 
 import pytest
 
-from debouncer.config import DebounceConfig, Strategy
+from quieto.config import DebounceConfig, Strategy
 
 
 class TestStrategy:

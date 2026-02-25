@@ -2,8 +2,8 @@
 
 import pytest
 
-from debouncer.config import DebounceConfig
-from debouncer.core import Debouncer
+from quieto.config import DebounceConfig
+from quieto.core import Debouncer
 
 
 @pytest.fixture

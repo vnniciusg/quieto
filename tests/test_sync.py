@@ -2,7 +2,7 @@
 
 import asyncio
 
-from debouncer._sync import _EventLoopThread, get_shared_loop
+from quieto._sync import _EventLoopThread, get_shared_loop
 
 
 class TestEventLoopThread:

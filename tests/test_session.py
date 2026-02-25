@@ -2,7 +2,7 @@
 
 import asyncio
 
-from debouncer.session import SessionManager
+from quieto.session import SessionManager
 
 
 class TestSessionManagerBasic:

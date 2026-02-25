@@ -2,7 +2,7 @@
 
 import asyncio
 
-from debouncer.strategies.trailing import TrailingDebouncer
+from quieto.strategies.trailing import TrailingDebouncer
 
 
 class TestTrailingDebouncerPush:

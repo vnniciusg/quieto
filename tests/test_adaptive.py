@@ -3,7 +3,7 @@
 import asyncio
 import time
 
-from debouncer.strategies.adaptive import AdaptiveDebouncer
+from quieto.strategies.adaptive import AdaptiveDebouncer
 
 
 class TestAdaptiveDebouncerBasic:

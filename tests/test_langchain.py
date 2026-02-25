@@ -14,8 +14,6 @@ from unittest.mock import MagicMock  # noqa: I001
 
 import pytest
 
-# --- Fake langchain module setup ---
-
 
 class _FakeHumanMessage:
     """Minimal stand-in for langchain.messages.HumanMessage."""
