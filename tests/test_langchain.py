@@ -85,7 +85,7 @@ def _patch_langchain_modules(monkeypatch: pytest.MonkeyPatch):
 
 def _import_middleware():
     """Import after fakes are patched."""
-    from debouncer.integrations.langchain import DebounceMiddleware, _coalesce_human_messages
+    from quieto.integrations.langchain import DebounceMiddleware, _coalesce_human_messages
 
     return DebounceMiddleware, _coalesce_human_messages
 
@@ -215,7 +215,7 @@ class TestDebounceMiddleware:
 
     def test_debouncer_property(self):
         cls, _ = _import_middleware()
-        from debouncer.core import Debouncer
+        from quieto.core import Debouncer
 
         mw = cls(delay=2.0, max_wait=8.0)
         assert isinstance(mw.debouncer, Debouncer)

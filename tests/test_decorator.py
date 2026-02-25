@@ -88,7 +88,7 @@ class TestDebounceDecorator:
         async def handler(messages: list[str]) -> None:
             pass
 
-        assert handler.quieto.config.strategy is Strategy.TRAILING  # type: ignore[attr-defined]
+        assert handler.debouncer.config.strategy is Strategy.TRAILING  # type: ignore[attr-defined]
 
     async def test_preserves_function_name(self):
         @debounce(delay=1.0)
