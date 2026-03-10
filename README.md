@@ -1,8 +1,8 @@
-# debouncer
+# Quieto
 
 High-performance async debounce library for Python 3.13+ with message coalescing, designed for LLM-powered applications.
 
-> **Built with [Claude Code](https://claude.ai)** — this entire codebase (architecture, implementation, tests, and this README) was written by Claude via Claude Code.
+> **Built with [Claude Code](https://claude.ai)** — this entire codebase (architecture, implementation, tests, and this README) was written by Claude 4.6 Opus via Claude Code.
 
 ## The problem
 
@@ -22,19 +22,19 @@ LLM receives: ["hi", "everything ok?"]
 ## Install
 
 ```bash
-uv add debouncer
+uv add quieto
 ```
 
 With LangChain integration:
 
 ```bash
-uv add debouncer[langchain]
+uv add quieto[langchain]
 ```
 
 Or with pip:
 
 ```bash
-pip install debouncer
+pip install quieto
 ```
 
 ## Quick start
@@ -42,7 +42,7 @@ pip install debouncer
 ### Decorator API
 
 ```python
-from debouncer import debounce
+from quieto import debounce
 
 @debounce(delay=2.0, max_wait=10.0)
 async def handle(messages: list[str]) -> str:
@@ -57,9 +57,9 @@ await handle("everything ok?")
 ### Imperative API
 
 ```python
-from debouncer import Debouncer, DebounceConfig
+from quieto import quieto, DebounceConfig
 
-async with Debouncer(config=DebounceConfig(delay=2.0, max_wait=10.0)) as d:
+async with quieto(config=DebounceConfig(delay=2.0, max_wait=10.0)) as d:
     await d.push("hello")
     await d.push("world")
     batch = await d.next_batch()  # ["hello", "world"]
@@ -68,7 +68,7 @@ async with Debouncer(config=DebounceConfig(delay=2.0, max_wait=10.0)) as d:
 ### Async iterator
 
 ```python
-async for batch in debouncer.batches():
+async for batch in quieto.batches():
     response = await llm.invoke(batch)
 ```
 
@@ -81,9 +81,9 @@ async for batch in debouncer.batches():
 | **Actor** | `Strategy.ACTOR` | Queue-based with natural backpressure via `asyncio.Queue`. |
 
 ```python
-from debouncer import Debouncer, DebounceConfig, Strategy
+from quieto import quieto, DebounceConfig, Strategy
 
-d = Debouncer(config=DebounceConfig(
+d = quieto(config=DebounceConfig(
     delay=2.0,
     max_wait=10.0,
     strategy=Strategy.ADAPTIVE,
@@ -95,7 +95,7 @@ d = Debouncer(config=DebounceConfig(
 Independent debounce state per user/session:
 
 ```python
-from debouncer import SessionManager
+from quieto import SessionManager
 
 async with SessionManager(delay=2.0, max_wait=10.0) as mgr:
     await mgr.push("session-123", "hi")
@@ -112,7 +112,7 @@ Idle sessions are garbage-collected automatically.
 
 ```python
 from langchain.agents import create_agent
-from debouncer.integrations.langchain import DebounceMiddleware
+from quieto.integrations.langchain import DebounceMiddleware
 
 agent = create_agent(
     model="gpt-4.1",
@@ -133,7 +133,7 @@ The middleware implements `wrap_model_call` to coalesce consecutive `HumanMessag
 | `max_wait` | `float \| None` | `10.0` | Max buffering time. `None` = no limit |
 | `strategy` | `Strategy` | `TRAILING` | Debounce strategy |
 
-### `Debouncer`
+### `quieto`
 
 | Method | Description |
 |--------|-------------|
@@ -151,7 +151,7 @@ The middleware implements `wrap_model_call` to coalesce consecutive `HumanMessag
 @debounce(delay=1.0, max_wait=5.0) # custom config
 
 # wrapper attributes:
-handler.debouncer  # access the Debouncer instance
+handler.quieto  # access the quieto instance
 handler.flush()    # force-flush
 await handler.close()  # shut down
 ```
